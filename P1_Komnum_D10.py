@@ -7,7 +7,7 @@ Kelompok 10 :
 
 Cara penggunaan :
 1. Clone Git ini
-2. Jalankan Praaktikum 1 Komnum_Kelompok 10.py
+2. Jalankan P1_Komnum_D10.py
 3. Masukkan persamaan
 4. Masukkan x1 dan x2 sebagai nilai awal
 5. Menampilkan hasil 10 kali iterasi
