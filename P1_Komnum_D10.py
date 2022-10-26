@@ -9,8 +9,9 @@ Cara penggunaan :
 1. Clone Git ini
 2. Jalankan Praaktikum 1 Komnum_Kelompok 10.py
 3. Masukkan persamaan
-4. Masukkan x1 dan x2 sebagai nilai awal
-5. Menampilkan hasil 10 kali iterasi
+4. Masukkan angka pembulatan dan taraf error
+5. Masukkan x1 dan x2 sebagai nilai awal
+6. Menampilkan hasil 10 kali iterasi, tekan enter jika ingin iterasi berlanjut 
 """
 
 import os
@@ -19,6 +20,11 @@ import sys
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.animation import FuncAnimation
+
+_x = np.zeros(1001)
+_y = np.zeros(1001)
+_xmid = []
+_ymid = []
 
 # Clear Screen
 def clear():
@@ -46,12 +52,14 @@ def persamaan(pers):
 
 # Menggambar grafik
 def grafik(x3,fx3):
-    plt.plot(x3,fx3,'b')
     plt.grid()
-    plt.title(print("\nGrafik Persamaan"))
+    print("\nHasil : ",x3,fx3)
+    plt.title(print("Grafik Persamaan :"))
     plt.xlabel("x")
     plt.ylabel("f(x)")
+    plt.plot(x3,fx3,'ro')
     plt.show()
+    
 
 # Metode Bolzano
 def bolzano(persp):
@@ -74,10 +82,21 @@ def bolzano(persp):
         fx1 = round(f(x1,p), ro)
         fx2 = round(f(x2,p), ro)
         
+
         print()
         print("Nilai dari, F(%d) = %f " % (x1,fx1))
         print("Nilai dari, F(%d) = %f " % (x2,fx2))
         print()
+
+        s = int(x1)
+        r = int(x2)
+        for i in range(s,r+1):
+            _x[i] = i
+            _y[i] = round(f(i,p), 2)
+        # print(_x)
+        # print(_y)
+        plt.plot(_x,_y,'b')
+        # os.system("pause")
         
         check = fx1*fx2
         if check < 0:
@@ -85,28 +104,31 @@ def bolzano(persp):
             break
         else:
             print("Belum memenuhi syarat. f(%d)*f(%d) >= 0 || %5.2f >= 0"%(x1,x2,check))
+
+        
     
     print()
-    # Tabel
+    # Output akan berbentuk tabel
     print("X1 = %d , X2 = %d, Error = %.6f"% (x1,x2,err))
     print("__________________________________________________________")
-    print("  n          x               f(x)              error    ")
+    print("  n          x              f(x)              error    ")
     print("__________________________________________________________")
     
     # Inisialisasi
     cektemp = random.randint(1,100)
     
     while True:
-        # Counter IterasI
+        # Counter Iteraso
         n = n + 1
         
         x3 = round(((x1 + x2)/2),ro)
         fx3 = round(f(x3,p),ro)
+        _xmid.append(x3)
+        _ymid.append(fx3)
         
-        # Output berbentuk tabel
         print("%3d|\t%.8f\t%10.8f %12.0f" % (n,x3,fx3,fx3))
         
-        # Print akar persamaan
+        
         if abs(fx3) <= 0 or abs(fx3) == cektemp :
             print("________________")
             print("Akar Persamaan, %.36f"%(x3))
@@ -122,7 +144,9 @@ def bolzano(persp):
         cektemp = abs(fx3)
         
         if n%10 == 0:
-            grafik(x3,fx3)
+            # print(_xmid,_ymid)
+            grafik(_xmid,_ymid)
+            os.system("pause")
             input("Lanjut? Tekan enter.")
             
 # Input persamaan
