@@ -7,15 +7,20 @@ Kelompok 10 :
 
 Cara penggunaan :
 1. Clone Git ini
-2. Jalankan P1_Komnum_D10.py
+2. Jalankan Praaktikum 1 Komnum_Kelompok 10.py
 3. Masukkan persamaan
 4. Masukkan x1 dan x2 sebagai nilai awal
 5. Menampilkan hasil 10 kali iterasi
 """
 
-import os, random, sys
-# from sy import Symbol, Derivative
+import os
+import random
+import sys
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.animation import FuncAnimation
 
+# Clear Screen
 def clear():
     if os.name == "nt":
         os.system('cls')
@@ -23,19 +28,32 @@ def clear():
     else:
         os.system('clear')
         
+# Pesan Error
 def error():
     print("Persamaan salah")
-    
+
+# Menghitung Persamaan
 def f(x,p):
     return (eval(p))
 
+# Merubah bentuk persamaan
 def persamaan(pers):
     n = 1
     while ((pers.find("^")) == 1):
         n = n + 1
         pers = pers.replace("x^%d"%(n), "pow(x,%d)"%(n))
     return pers
-    
+
+# Menggambar grafik
+def grafik(x3,fx3):
+    plt.plot(x3,fx3,'b')
+    plt.grid()
+    plt.title(print("\nGrafik Persamaan"))
+    plt.xlabel("x")
+    plt.ylabel("f(x)")
+    plt.show()
+
+# Metode Bolzano
 def bolzano(persp):
     n = 0
     p = persamaan(persp)
@@ -44,13 +62,17 @@ def bolzano(persp):
     print("Metode Bolzano")
     print("Persamaan, %s"%(persp))
     print()
+    print("(Berapa angka dibelakang koma. Masukkan 2 jika tidak yakin)")
+    ro = int(input("Pembulatan : "))
+    print("(Ingin mendekati nilai berapa. Masukkan 0 jika tidak yakin)")
+    err = float(input("Masukkan Error : "))
     
     while True:
         print()
         x1 = float(input("Masukkan X1 : "))
         x2 = float(input("Masukkan X2 : "))
-        fx1 = round(f(x1,p), 2)
-        fx2 = round(f(x2,p), 2)
+        fx1 = round(f(x1,p), ro)
+        fx2 = round(f(x2,p), ro)
         
         print()
         print("Nilai dari, F(%d) = %f " % (x1,fx1))
@@ -65,25 +87,31 @@ def bolzano(persp):
             print("Belum memenuhi syarat. f(%d)*f(%d) >= 0 || %5.2f >= 0"%(x1,x2,check))
     
     print()
-    #Mempersiapkan output berupa tabel
-    print("X1 = %d , X2 = %d"% (x1,x2))
-    print("________________________________________")
-    print("  n           x              f(x)       ")
-    print("________________________________________")
+    # Tabel
+    print("X1 = %d , X2 = %d, Error = %.6f"% (x1,x2,err))
+    print("__________________________________________________________")
+    print("  n          x               f(x)              error    ")
+    print("__________________________________________________________")
     
+    # Inisialisasi
     cektemp = random.randint(1,100)
     
     while True:
+        # Counter IterasI
         n = n + 1
-        x3 = round(((x1 + x2)/2),2)
-        fx3 = round(f(x3,p),2)
         
-        print("%3d|\t%.8f\t%10.8f" % (n,x3,fx3))
+        x3 = round(((x1 + x2)/2),ro)
+        fx3 = round(f(x3,p),ro)
         
+        # Output berbentuk tabel
+        print("%3d|\t%.8f\t%10.8f %12.0f" % (n,x3,fx3,fx3))
+        
+        # Print akar persamaan
         if abs(fx3) <= 0 or abs(fx3) == cektemp :
             print("________________")
             print("Akar Persamaan, %.36f"%(x3))
             print("Atau ~ %.4f"%(round(x3,4)))
+            print("Error, %.4f"%(round(fx3,4)))
             print()
         
         if f(x1,p)*f(x3,p) > 0:
@@ -94,9 +122,10 @@ def bolzano(persp):
         cektemp = abs(fx3)
         
         if n%10 == 0:
-        	input("Lanjut? Tekan enter.")
-    
-
+            grafik(x3,fx3)
+            input("Lanjut? Tekan enter.")
+            
+# Input persamaan
 if __name__ == '__main__':
     #Inisialisasi Variable
     pil2 = 'y'
@@ -126,11 +155,3 @@ if __name__ == '__main__':
 
         #Pemilihan Metode Numerik
         bolzano(pers)
-
-        # print()
-        # pil2 = input("Ulang ? (y/n) : ")
-        # if (pil2 =='y' or pil2 == 'Y'):
-        # 	pil3 = input("Ulang dengan Persamaan yang sama ? (y/n) : ")
-        #     clear()
-        # else:
-        #     exit()
