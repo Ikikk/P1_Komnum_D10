@@ -2,7 +2,7 @@
 Praktikum 1 mengenai implementasi Metode Bolzano terhadap suatu akar persamaan
 
 ## Anggota
-|     | Nama                              | NRP        | JOBDESK                                   |
+|     | Nama                              | NRP        | Jobdesk                                   |
 | --- | --------------------------------- | ---------- | ----------------------------------------- |
 | 1   | Rizky Alifiyah Rahma              | 5025211208 | Membuat file codingan dan dokumen laporan |
 | 2   | Muhammad Naufal Fawwaz Ramadhan   | 5025211223 | Mendemokan program                        |
@@ -10,16 +10,16 @@ Praktikum 1 mengenai implementasi Metode Bolzano terhadap suatu akar persamaan
 ## Penjelasan
 - ### Fungsi yang digunakan
 
-   Nama Fungsi       | Penjelasan Singkat          
-   ----------------- | -------------------------- |
-   def clear()       | Berfungsi untuk membersihkan layar dari semua teks yang telah ditulis saat berganti section |
-   def error()       | Berfungsi untuk memberitahukan user saat memasukkan persamaan yang salah atau tidak sesuai format |
-   def f(x,p)        | Terdapat fungsi bawaan yaitu fungsi `eval()` yang berfungsi untuk menyelesaikan operasi matematika pada bilangan bulat atau float dalam bentuk      string |
-   def persamaan()   | Berfungsi untuk merubah notasi ^ menjadi notasi pangkat yang ada di dalam persamaan |
-   def grafik()      | Dalam fungsi ini digunakan library `matplotlib` yang berfungsi dalam penggambaran grafik beserta titik uji cobanya |
-   def bolzano()     | Berfungsi untuk mencari akar dalam suatu persamaan menggunakan metode bolzano. Dengan memasukkan titik bawah dan titik atas (x1 dan x2) selama      `f(x1)*f(x2) >= 0` dan `1 < abs(fx3) < 100`, ditemukan akar persamaan (x3) yang akan dimasukkan kedalam fungsi persamaan (f(x3)). Dari x3 dan f(x3) akan                menghasilkan titik-titik di sepanjang kurva |
+   | Nama Fungsi        | Penjelasan Singkat         |          
+   ---------------------| -------------------------- |
+   def clear()          | Berfungsi untuk membersihkan layar dari semua teks yang telah ditulis saat berganti section |
+   def error()          | Berfungsi untuk memberitahukan user saat memasukkan persamaan yang salah atau tidak sesuai format |
+   def f(x,p)           |   Terdapat fungsi bawaan yaitu fungsi `eval()` yang berfungsi untuk menyelesaikan operasi matematika pada bilangan bulat atau float dalam bentuk string |
+   def persamaan()      | Berfungsi untuk merubah notasi ^ menjadi notasi pangkat yang ada di dalam persamaan |
+   def grafik()         | Dalam fungsi ini digunakan library `matplotlib` yang berfungsi dalam penggambaran grafik beserta titik uji cobanya |
+   def bolzano()        | Berfungsi untuk mencari akar dalam suatu persamaan menggunakan metode bolzano. Dengan memasukkan titik bawah dan titik atas (x1 dan x2) selama `f(x1)*f(x2) >= 0` dan `1 < abs(fx3) < 100`, ditemukan akar persamaan (x3) yang akan dimasukkan kedalam fungsi persamaan (f(x3)). Dari x3 dan f(x3) akan menghasilkan titik-titik di sepanjang kurva |
 
-   #### Penjelasan lanjutan def bolzano()
+   #### Penjelasan lanjutan fungsi bolzano()
    Ada 2 kondisi yang mungkin terjadi:
    1. Jika `f(x1)*f(x2) < 0`, maka:
       - program mengeluarkan output `belum memenuhi syarat`
