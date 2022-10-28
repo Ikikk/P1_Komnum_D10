@@ -1,4 +1,4 @@
-# Praktikum-1-Komnum-D_Kelompok-10
+# P1_Komnum_D10
 Praktikum 1 mengenai implementasi Metode Bolzano terhadap suatu akar persamaan
 
 ## Anggota
