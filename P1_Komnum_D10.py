@@ -26,7 +26,7 @@ _y = np.zeros(1001)
 _xmid = []
 _ymid = []
 
-# Clear Screen
+#Clear Screen
 def clear():
     if os.name == "nt":
         os.system('cls')
@@ -34,23 +34,23 @@ def clear():
     else:
         os.system('clear')
         
-# Pesan Error
+#Pesan Error
 def error():
     print("Persamaan salah")
 
-# Menghitung Persamaan
+#Menghitung Persamaan
 def f(x,p):
-    return (eval(p))
+    return (eval(p)) #Fungsi bawaan python
 
-# Merubah bentuk persamaan
+#Merubah bentuk persamaan
 def persamaan(pers):
     n = 1
-    while ((pers.find("^")) == 1):
+    while ((pers.find("^")) == 1): #Jika menemukan karakter ^
         n = n + 1
-        pers = pers.replace("x^%d"%(n), "pow(x,%d)"%(n))
+        pers = pers.replace("x^%d"%(n), "pow(x,%d)"%(n)) #Diubah menjadi bilangan berpangkat
     return pers
 
-# Menggambar grafik
+#Menggambar grafik
 def grafik(x3,fx3):
     plt.grid()
     print("\nHasil : ",x3,fx3)
@@ -64,7 +64,7 @@ def grafik(x3,fx3):
 # Metode Bolzano
 def bolzano(persp):
     n = 0
-    p = persamaan(persp)
+    p = persamaan(persp) #Set nilai p dengan hasil fungsi persamaan()
     
     clear()
     print("Metode Bolzano")
@@ -79,7 +79,7 @@ def bolzano(persp):
         print()
         x1 = float(input("Masukkan X1 : "))
         x2 = float(input("Masukkan X2 : "))
-        fx1 = round(f(x1,p), ro)
+        fx1 = round(f(x1,p), ro) #Pembulatan bilangan
         fx2 = round(f(x2,p), ro)
         
 
@@ -91,14 +91,14 @@ def bolzano(persp):
         s = int(x1)
         r = int(x2)
         for i in range(s,r+1):
-            _x[i] = i
+            _x[i] = i #Menyimpan x1 dalam bentuk array
             _y[i] = round(f(i,p), 2)
         # print(_x)
         # print(_y)
-        plt.plot(_x,_y,'b')
+        plt.plot(_x,_y,'b') #Membuat kumpulan titik-titik yang membentuk kurva
         # os.system("pause")
         
-        check = fx1*fx2
+        check = fx1*fx2 #Untuk mengecek syarat
         if check < 0:
             print("Sudah memenuhi syarat. f(%d)*f(%d) < 0 || %5.2f < 0"%(x1,x2,check))
             break
@@ -115,33 +115,33 @@ def bolzano(persp):
     print("__________________________________________________________")
     
     # Inisialisasi
-    cektemp = random.randint(1,100)
+    cektemp = random.randint(1,100) #Acak bilangan random untuk iterasi pertama
     
     while True:
-        # Counter Iteraso
+        # Counter Iterasi
         n = n + 1
         
-        x3 = round(((x1 + x2)/2),ro)
+        x3 = round(((x1 + x2)/2),ro) #Titik uji coba
         fx3 = round(f(x3,p),ro)
-        _xmid.append(x3)
+        _xmid.append(x3) #Memasukkan nilai x3 ke dalam array kosong
         _ymid.append(fx3)
         
-        print("%3d|\t%.8f\t%10.8f %12.0f" % (n,x3,fx3,fx3))
+        print("%3d|\t%.8f\t%10.8f %12.0f" % (n,x3,fx3,fx3)) #Proses iterasi
         
         
-        if abs(fx3) <= 0 or abs(fx3) == cektemp :
+        if abs(fx3) <= 0 or abs(fx3) == cektemp : #Jika abs(fx3) mendekati 0
             print("________________")
             print("Akar Persamaan, %.36f"%(x3))
             print("Atau ~ %.4f"%(round(x3,4)))
             print("Error, %.4f"%(round(fx3,4)))
             print()
         
-        if f(x1,p)*f(x3,p) > 0:
-            x1 = x3
-        else:
-            x2 = x3
+#         if f(x1,p)*f(x3,p) > 0:
+#             x1 = x3
+#         else:
+#             x2 = x3
 
-        cektemp = abs(fx3)
+        cektemp = abs(fx3) #Set nilai cektemp yang baru dengan nilai mutlak fx3
         
         if n%10 == 0:
             # print(_xmid,_ymid)
@@ -154,14 +154,14 @@ if __name__ == '__main__':
     #Inisialisasi Variable
     pil2 = 'y'
 
-    if( (len(sys.argv)>2)): #Error Usage
+    if( (len(sys.argv)>2)): #Error jika argumen lebih dari 2
         error()
         exit()
 
     elif(len(sys.argv)==2): #jika Menggnuakan Argument
         pil3 = 'y'
         pers = str(sys.argv[1])
-        if((sys.argv[1].find('x')) == -1):
+        if((sys.argv[1].find('x')) == -1): #jika ada variabel selain x
             error()
             print('\nNo Variable or using other than x')
             exit()
@@ -173,8 +173,8 @@ if __name__ == '__main__':
     while(pil2 == 'y' or pil2 == 'Y'):
         if (pil3 == 'n' or pil3 == 'N'):
             print("ex. x^3 + 2*x^2 - 4*x - 4")
-            pers = str(input("Masukkan Persamaan : "))
-            pers = pers.lower()
+            pers = str(input("Masukkan Persamaan : ")) #Input persamaan
+            pers = pers.lower() #Merubah huruf kapital menjadi huruf kecil
         print()
 
         #Pemilihan Metode Numerik
